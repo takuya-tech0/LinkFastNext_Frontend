@@ -1,11 +1,19 @@
 "use client";
-export const dynamic = 'force-dynamic'
 import OneCustomerInfoCard from "@/app/components/one_customer_info_card.jsx";
 import fetchCustomer from "./../fetchCustomer";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, use } from "react";
+import { Suspense } from "react"
 
-export default function ConfirmPage(props) {
+export default function ConfirmPageWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ConfirmPage />
+    </Suspense>
+  );
+}
+
+function ConfirmPage(props) {
   const params = use(props.params);
   const router = useRouter();
   const id = params.id;

@@ -1,9 +1,17 @@
 "use client";
-export const dynamic = 'force-dynamic'
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react"
 
-export default function ConfirmPage(props) {
+export default function ConfirmPageWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ConfirmPage />
+    </Suspense>
+  );
+}
+
+function ConfirmPage(props) {
   const customer_id = useSearchParams().get("customer_id");
 
   return (
